@@ -113,5 +113,31 @@
         <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="{{ asset('img/fondo.png') }}" alt="">
       </div>
   </div>
+  <script>
+    $(document).ready(function() {
+      $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+
+      });
+    //     $.ajax({  
+    //     type : 'POST',
+    //     url  : "{{route('post.obtener')}}",
+    //     data:  {'id_user': '3', 'categoria': 'modal', 'contenido': 'contenido fjls', 'imagen': 'dshfjd.jpg', 'tags': 'tag1,tag2,tag3', 'created_at': '2022-02-18 21:32:46', 'updated_at': '2022-02-18 21:32:46'},
+    //     success: function(response){
+    //       console.log(response);
+    //     }  
+    // });
+    $.ajax({  
+        type : 'PUT',
+        url  : "{{route('post.up')}}",
+        data:  {'id': '1','id_user': '3', 'categoria': 'jl', 'contenido': 'contenido fjls', 'imagen': 'dshfjd.jpg', 'tags': 'tag1,tag2,tag3', 'created_at': '2022-02-18 21:32:46', 'updated_at': '2022-02-18 21:32:46'},
+        success: function(response){
+          console.log(response);
+        }  
+    });
+    })
+  </script>
 </body>
 </html>

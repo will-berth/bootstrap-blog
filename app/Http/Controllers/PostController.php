@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         $datos = Post::all();
-        echo $datos;
+        return $datos;
     }
 
     /**
@@ -23,9 +23,30 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        // $validate = $request->validate([
+        //     'id_user' => 'required',
+        //     'categoria' => 'required',
+        //     'contenido' => 'required',
+        //     'tags' => 'required',
+        //     'created_at' => 'required',
+        //     'updated_at' => 'required',
+        // ]);
+        $post = Post::create($request->all());
+
         //
+        // $post = Post::create([
+        //     'id_user' => 1,
+        //     'categoria' => 'Layouts',
+        //     'contenido' => 'NOMBRE SLFKJ',
+        //     'imagen' => 'sdjfhsjd',
+        //     'tags' => 'ayuda,bootstrap,layouts',
+        //     'created_at' => '14-02-2022',
+        //     'updated_at' => '14-02-2022'
+        // ]);
+        // $data = \DB::table('posts')->get();
+        return 'exito';
     }
 
     /**
@@ -48,6 +69,9 @@ class PostController extends Controller
     public function show($id)
     {
         //
+        $datos = Post::where('id', $id)->get();
+        return view('view-post', ['datosPost' => $datos]);
+        // return $datos;
     }
 
     /**
@@ -68,9 +92,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $post = Post::find($request['id']);
+        $post->fill($request->all())->save();
+
+        return $post;
     }
 
     /**
@@ -82,5 +110,13 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getPost(Request $request)
+    {
+        $id = $request->input('id');
+        if(true){
+            return true;
+        }
     }
 }

@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\RespuestaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/blog', function () {
     return view('index');
 });
 Route::get('/categorias', function () {
@@ -24,12 +28,6 @@ Route::get('/view/post', function () {
 });
 Route::get('/aboutus', function () {
     return view('quienessomos');
-});
-Route::get('/componentes', function () {
-    return view('categoria_componentes');
-});
-Route::get('/layouts', function () {
-    return view('categoria_layouts');
 });
 // Route::get('/dashboard', function () {
 //     return view('admin.dashboard-new');
@@ -60,3 +58,16 @@ Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('config:cache');
     return 'DONE'; //Return anything
 });
+Route::post('/comentarioTest', [ComentarioController::class, 'show'])->name('comentari.post');
+Route::post('/addComentario', [ComentarioController::class, 'create'])->name('addComentario');
+Route::post('/addRespuesta', [RespuestaController::class, 'create'])->name('addRespuesta');
+Route::post('/respuestaTest', [RespuestaController::class, 'show'])->name('resp.post');
+
+Route::get('/post/busca', [PostController::class, 'index'])->name('post.buscar');
+Route::post('/post/bus', [PostController::class, 'create'])->name('post.obtener');
+Route::put('/post/update', [PostController::class, 'update'])->name('post.up');
+// en ajax se llamara la ruta post.buscar como url
+
+Route::get('/post/{id}', [PostController::class, 'show']);
+Route::get('/categoria/{nombre}', [CategoriaController::class, 'show']);
+Route::get('/categoria', [CategoriaController::class, 'index']);
