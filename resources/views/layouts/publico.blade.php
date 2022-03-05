@@ -14,8 +14,32 @@
     <title>BootstrapBlog</title>
     <script src="{{ asset('dist/js/jquery.min.js') }}"></script>
     <script src="{{ asset('dist/js/tabler.min.css') }}"></script>
+    <style>
+      body{
+        overflow-x: hidden;
+      }
+      .btnTop{
+        opacity: 0;
+        transition: all 0.3s;
+        width: 40px;
+        height: 40px;
+        background-color: #4F46E5;
+        position: fixed;
+        bottom: 15px;
+        left: 15px;
+        z-index: 100;
+        border-radius: 100px;
+      }
+      .caja-animado{
+        opacity: 0;
+        transition: all 0.5s;
+      }
+    </style>
 </head>
-<body>
+<body id="#body">
+  <button id="btnTopScroll" class="btnTop d-flex justify-content-center align-items-center text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+</svg></button>
 <div class="container">
 <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
             <polygon points="50,0 100,0 50,100 0,100" />
@@ -42,7 +66,7 @@
                   </div>
                 </div>
                 <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-                  <a href="/categorias" class="font-medium text-gray-500 hover:text-gray-900">Categorias</a>
+                  <a href="/categoria" class="font-medium text-gray-500 hover:text-gray-900">Categorias</a>
 
                   <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Preguntas</a>
     
@@ -92,5 +116,39 @@
           </div>
 </div>
       @yield('contenido')
+      <script>
+        $(document).ready(function(){
+          $('#btnTopScroll').click(function(){
+            console.log('hhola')
+            $('html, body').animate({scrollTop:0}, 700);
+          })
+          $(window).scroll(function(){
+            let cont = 0;
+            if($(this).scrollTop() > 100){
+              console.log('100 scrol')
+              $('#btnTopScroll').css('opacity', '10')
+              $('#btnTopScroll').css('transition', 'all 0.5s')
+            }else{
+              console.log($(this).scrollTop())
+              $('#btnTopScroll').css('opacity', '0')
+            }
+
+          })
+
+          let animado = document.querySelectorAll('.caja-animado');
+          $(window).scroll(function(){
+            console.log('verificando')
+            for(let i = 0; i < animado.length; i++){
+              let alturaPost = animado[i].offsetTop;
+              console.log(i)
+              if(alturaPost / 3 < $(this).scrollTop()){
+                animado[i].style.opacity = 1;
+              }
+            }
+          })
+
+          function animadoPosts(){}
+        })
+      </script>
 </body>
 </html>

@@ -10,6 +10,7 @@ class ComentarioController extends Controller
     //
     public function show(Request $request)
     {
+        $userAuth = auth()->user();
         $comentarios = Comentario::select(
             'comentarios.id',
             'comentarios.id_post',
@@ -20,6 +21,10 @@ class ComentarioController extends Controller
             'users.name',
         )->join('users', 'users.id', '=', 'comentarios.id_user')
         ->where('id_post', $request->id)->get();
+        
+        if(!$userAuth){
+            return 'error';
+        }
         return $comentarios;
     }
 

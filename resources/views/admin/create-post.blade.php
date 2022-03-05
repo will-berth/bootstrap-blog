@@ -24,27 +24,37 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-    <form action="" class="shadow-sm rounded p-4 bg-white" onsubmit="event.preventDefault();">
+    <form id="createPost" action="" class="shadow-sm rounded p-4 blackSecondActive">
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label class="form-label required">Titulo</label>
+                    <label class="form-label required">Contenido</label>
                     <div class="input-icon mb-3">
                         <span class="input-icon-addon">
                           <i class="ti ti-signature"></i>
                         </span>
-                        <input type="text" value="" class="form-control" required pattern="[a-zA-Z0-9áéóíú  ]{2,200}" placeholder="Escriba un titulo">
+                        <input name="contenido" type="text" value="" class="form-control" required pattern="[a-zA-Z0-9áéóíú  ]{2,200}" placeholder="Escriba un titulo">
+                        <input value="{{auth()->user()->id}}" name="id_user" style="display: none;" id="id_post" type="number" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label class="form-label required">Descripción</label>
+                    <label class="form-label required">Categoria</label>
                     <div class="input-icon mb-3">
                         <span class="input-icon-addon">
                           <i class="ti ti-writing-sign"></i>
                         </span>
-                        <input type="text" value="" class="form-control" required pattern="[a-zA-Z0-9áéóíú  ]{2,200}" placeholder="Agregue una descripción">
+                        <input name="categoria" type="text" value="" class="form-control" required pattern="[a-zA-Z0-9áéóíú  ]{2,200}" placeholder="Agregue una categoria">
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
+                    <label class="form-label required">Tags</label>
+                    <div class="input-icon mb-3">
+                        <span class="input-icon-addon">
+                          <i class="ti ti-writing-sign"></i>
+                        </span>
+                        <input name="tags" type="text" value="" class="form-control" required pattern="[a-zA-Z0-9áéóíú,,,,,,,  ]{2,200}" placeholder="Agregue sus tags. ej: Flexbox,Layouts,Formularios">
+                    </div>
+                </div>
+                <!-- <div class="col-md-4 mb-3">
                     <label class="form-label required">Imagen</label>
                     <div class="input-icon mb-3">
                         <span class="input-icon-addon">
@@ -52,11 +62,11 @@
                         </span>
                         <input type="file" value="" class="form-control">
                     </div>
-                </div>
-                <div class="col-md-4 mb-3">
+                </div> -->
+                <!-- <div class="col-md-4 mb-3">
                     <label class="form-label required">Código</label>
                     <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Código"></textarea>
-                </div>
+                </div> -->
             </div>
             <br>
             <button type="submit" class="btn btn-success">Crear post</button>
@@ -71,173 +81,24 @@
   <script src="{{asset('dist/js/dashboard/plugins/smooth-scrollbar.min.js')}}"></script>
   <script src="{{asset('dist/js/dashboard/plugins/chartjs.min.js')}}"></script>
   <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
-
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "#fff",
-          data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-          maxBarThickness: 6
-        }, ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
+    $(document).ready(function(){
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 15,
-              font: {
-                size: 14,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#fff"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false
-            },
-            ticks: {
-              display: false
-            },
-          },
-        },
-      },
-    });
-
-
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-            label: "Mobile apps",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#cb0c9f",
-            borderWidth: 3,
-            backgroundColor: gradientStroke1,
-            fill: true,
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-            maxBarThickness: 6
-
-          },
-          {
-            label: "Websites",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#3A416F",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            fill: true,
-            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-            maxBarThickness: 6
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
+      });
+      $('#createPost').submit(function(e){
+        e.preventDefault();
+        let dataPost = $(this).serialize();
+        $.ajax({
+          type : 'POST',
+          url  : "{{route('post.create')}}",
+          data:  dataPost,
+          success: function(response){
+            $('#createPost').trigger('reset');
           }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#b2b9bf',
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#b2b9bf',
-              padding: 20,
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
+        })
+      });
     });
   </script>
   <script>

@@ -13,9 +13,9 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
-        '/post/bus',
-        '/post/update',
-        '/comentarioTest',
-        '/respuestaTest'
+        // '/post/bus',
+        // '/post/update',
+        // '/comentarioTest',
+        // '/respuestaTest'
     ];
 }

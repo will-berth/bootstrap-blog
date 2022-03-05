@@ -24,7 +24,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-    <form id="adduser" method="POST" enctype="multipart/form-data" class="bg-white p-4 rounded shadow-sm" onsubmit="event.preventDefault();">
+    <form id="adduser" method="POST" enctype="multipart/form-data" class="blackSecondActive p-4 rounded shadow-sm" onsubmit="event.preventDefault();">
         @csrf
         <div class="row">
             <div class="col-md-4">

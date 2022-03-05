@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="apple-touch-icon" sizes="76x76" href="{{asset('dist/img/dashboard/apple-icon.png')}}">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
@@ -25,20 +26,70 @@
   <!-- <script src="{{ asset('dist/js/sweetalert2.all.min.js')}}"></script> -->
   <script src="{{ asset('dist/js/jquery.min.js') }}"></script>
     <script src="{{ asset('dist/js/tabler.min.js') }}"></script>
+
+    <style>
+      .darkModeSwitch{
+          background: #3494b1;
+          display:flex;
+          position: relative;
+          cursor: pointer;
+          outline: none;
+          border: none;
+          border-radius: 1rem;
+          align-items: center;
+          justify-content: space-between;
+      }
+      .darkModeSwitch span{
+          width:30px;
+          height:30px;
+          line-height:30px;
+          display:block;
+          color:#fff;
+          background: none;
+      }
+      .darkModeSwitch::after{
+          display:block;
+          background: #fffbf5;
+          width: 2.4rem;
+          height: 2.4rem;
+          position: absolute;
+          top:0;
+          left:0;
+          right:unset;
+          border-radius: 3rem;
+          transition: all .5s ease;
+          box-shadow: 0 0 2px 2px rgba(0, 0, 0, .5);
+          content: "";
+      }
+      .darkModeSwitch.active{
+        background: #fdd384;
+      }
+      .darkModeSwitch.active::after{
+        left:unset;
+        right:0;
+      }
+      body {
+        background: #f2f2f2;
+        font-family: "Lato", Helvetica, sans-serif;
+      }
+      body.dark{
+        background:  #5436;
+      }
+    </style>
 </head>
-<body class="g-sidenav-show  bg-gray-100">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+<body class="g-sidenav-show">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl fixed-start " id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="/" target="_blank">
-        <span class="ms-1 font-weight-bold">BootstrapBlog</span>
+        <span class="textModeBlack ms-1 font-weight-bold">BootstrapBlog</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link {{ (request()->is('dashboard')) ? 'active' : '' }}" href="/dashboard">
+          <a class="nav-link {{ (request()->is('dashboard')) ? 'active blackSecondActive' : '' }}" href="/dashboard">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -54,11 +105,11 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Home</span>
+            <span class="textModeBlack nav-link-text ms-1">Home</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link {{ (request()->is('admin-post')) ? 'active' : '' }}" href="/admin-post">
+        <li id="blakctest" class="nav-item">
+          <a class="nav-link {{ (request()->is('admin-post')) ? 'active blackSecondActive' : '' }}" href="/admin-post">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
@@ -74,11 +125,11 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Mis posts</span>
+            <span class="textModeBlack nav-link-text ms-1">Mis posts</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ (request()->is('create-post')) ? 'active' : '' }} " href="/create-post">
+          <a class="nav-link {{ (request()->is('create-post')) ? 'active blackSecondActive' : '' }} " href="/create-post">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>credit-card</title>
@@ -94,11 +145,11 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Crear post</span>
+            <span class=" textModeBlack nav-link-text ms-1">Crear post</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ (request()->is('create-user')) ? 'active' : '' }}" href="/create-user">
+          <a class="nav-link {{ (request()->is('create-user')) ? 'active blackSecondActive' : '' }}" href="/create-user">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>box-3d-50</title>
@@ -115,7 +166,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Crear usuario</span>
+            <span class="textModeBlack nav-link-text ms-1">Crear usuario</span>
           </a>
         </li>
         <li class="nav-item mt-3">
@@ -139,7 +190,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Perfil</span>
+            <span class="textModeBlack nav-link-text ms-1">Perfil</span>
           </a>
         </li>
         <li class="nav-item">
@@ -161,14 +212,71 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Log Out</span>
+            <span class="textModeBlack nav-link-text ms-1">Log Out</span>
           </a>
           </form>
           
         </li>
+        <li class="nav-item" style="padding: 1rem 2rem;">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="modeBlack">
+            <i class="fa fa-moon-o"></i>
+          </div>
+        </li>
+
+        
       </ul>
     </div>
   </aside>
   @yield('contenido-admin')
+  <script>
+    $(document).ready(function(){
+
+      const switchButton = document.getElementById('switch');
+      var switchStatus = false;
+      $("#modeBlack").on('change', function() {
+          if ($(this).is(':checked')) {
+              switchStatus = $(this).is(':checked');
+          }
+          else {
+            switchStatus = $(this).is(':checked');
+          }
+          if(switchStatus){
+            console.log('activo')
+            $('html, body').css('background-color', '#101322');
+            $('.blackSecondActive').css('background-color', '#070715');
+            $('.textModeBlack').css('color', '#AEAEAE');
+            // $('main').css('background-color', 'red');
+          }else{
+            $('html, body').css('background-color', '#f2f2f2');
+            $('.blackSecondActive').css('background-color', '#fff');
+            $('.textModeBlack').css('color', '#344767');
+            // $('aside').css('background-color', 'green');
+            // $('main').css('background-color', 'green');
+
+          }
+      });
+   
+      $('#ff').click((e) => {
+        if($('#ff').is(':checked')){
+
+          console.log($('#ff').attr('checked', false))
+        }else{
+          console.log($('#ff').attr('checked', true))
+
+        }
+      
+        // document.body.classList.toggle('dark'); //toggle the HTML body the class 'dark'
+        // switchButton.classList.toggle('active');//toggle the HTML button with the id='switch' with the class 'active'
+        // $('#blakctest').css('background-color', 'red');
+        // if($(this).hasClass('active')){
+        //   console.log($(this).val())
+        // }else{
+        //   console.log('modo oscuro off')
+
+        // }
+      });
+    })
+  </script>
 </body>
 </html>

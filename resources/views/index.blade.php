@@ -39,7 +39,7 @@
                   </div>
                 </div>
                 <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-                  <a href="/categorias" class="font-medium text-gray-500 hover:text-gray-900">Categorias</a>
+                  <a href="/categoria" class="font-medium text-gray-500 hover:text-gray-900">Categorias</a>
                   
                   <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Preguntas</a>
     
@@ -121,22 +121,6 @@
         }
 
       });
-    //     $.ajax({  
-    //     type : 'POST',
-    //     url  : "{{route('post.obtener')}}",
-    //     data:  {'id_user': '3', 'categoria': 'modal', 'contenido': 'contenido fjls', 'imagen': 'dshfjd.jpg', 'tags': 'tag1,tag2,tag3', 'created_at': '2022-02-18 21:32:46', 'updated_at': '2022-02-18 21:32:46'},
-    //     success: function(response){
-    //       console.log(response);
-    //     }  
-    // });
-    $.ajax({  
-        type : 'PUT',
-        url  : "{{route('post.up')}}",
-        data:  {'id': '1','id_user': '3', 'categoria': 'jl', 'contenido': 'contenido fjls', 'imagen': 'dshfjd.jpg', 'tags': 'tag1,tag2,tag3', 'created_at': '2022-02-18 21:32:46', 'updated_at': '2022-02-18 21:32:46'},
-        success: function(response){
-          console.log(response);
-        }  
-    });
     })
   </script>
 </body>

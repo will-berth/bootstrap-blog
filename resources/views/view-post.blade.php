@@ -1,14 +1,21 @@
 @extends('layouts.publico')
 @section('contenido')
 <br>
+@if($auth)
+  @php
+    $userAuth = $auth->id;
+  @endphp
+@else
+  @php
+    $userAuth = 0;
+  @endphp
+@endif
     <br>
-    <h2>{{$datosPost}}</h2>
     <div class="container">
         <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
             <li class="breadcrumb-item"><a class="text-primary" href="/">Home</a></li>
-            <li class="breadcrumb-item"><a class="text-primary" href="/post">Bootstrap</a></li>
-            <li class="breadcrumb-item"><a class="text-primary" href="/table">Table</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a href="#">Table responsive</a></li>
+            <li class="breadcrumb-item"><a class="text-primary" href="/categoria">Categorias</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="#">{{$datosPost[0]->contenido}}</a></li>
         </ol>
         <br>
         <div class="row">
@@ -20,23 +27,36 @@
                 <span class="readingtime">4 min read</span>
                 <span class="wordcount">1309</span> -->
               </p>
+              @php
+                $tags = explode(",", $datosPost[0]->tags);
+              @endphp
+              <div class="tags mb-2">
+                @foreach($tags as $itemTag)
+                  <span class="badge bg-info">{{$itemTag}}</span>
+                @endforeach
+              </div>
               <img src="https://www.nicesnippets.com/upload/how-to-set-vertical-align-in-bootstrap-code.png" alt="">
             </div>
           </div>
           
           <div class="col-12">
             <div class="post-contenido mt-4" style="max-width: 70%;margin: 0 auto;">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus cum beatae id mollitia ut perferendis delectus sapiente nemo, earum iusto placeat nostrum ratione quos similique labore quod possimus ipsam sunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, ducimus praesentium! Labore iste, corrupti voluptas quod, consectetur, temporibus voluptates quisquam est recusandae unde veritatis quaerat earum nisi tempora? Eligendi, delectus?
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias, quae molestias rem numquam culpa ex ipsa necessitatibus, fugit quam, deleniti soluta temporibus eveniet. Facere aliquid facilis dolor dolore, assumenda corporis?
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quos at beatae qui sed, voluptates assumenda autem, est quaerat doloremque blanditiis exercitationem magni itaque ratione ex ducimus repudiandae officia inventore?
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas ea nihil vitae ipsum corporis! Reprehenderit, rerum obcaecati cumque reiciendis quidem sint neque autem totam commodi quisquam, recusandae voluptate error debitis?
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque exercitationem rerum cum suscipit pariatur ullam quae beatae molestias id distinctio! Nihil omnis, repellat iste eaque sunt ipsa suscipit reprehenderit commodi!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur non ullam ipsam corrupti tempore labore quaerat harum earum nesciunt consequatur explicabo incidunt, totam libero dolorum laboriosam odio, atque quibusdam itaque.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus consequuntur atque, nemo reprehenderit, iste possimus vel provident distinctio ducimus quam dolorem corrupti temporibus cupiditate aliquid in iure sit perspiciatis dignissimos.
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro voluptatem maiores qui alias dignissimos tenetur, itaque numquam iusto, beatae assumenda nemo saepe corrupti earum unde dolor obcaecati ab nisi nihil.
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore blanditiis amet necessitatibus aliquam labore reprehenderit corporis quod esse. Eius omnis error porro a tempore, voluptates illum laboriosam alias at quam!
-
-              </p>
+              <p class="caja-animado" style="text-align: justify;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse inventore consectetur possimus voluptatem molestiae ab facere cum commodi deserunt, nobis explicabo quae non repellat ad aut iusto fuga blanditiis aliquam!
+              Sit officia molestiae ab sint ducimus cupiditate quidem. Nemo nesciunt laboriosam corrupti repudiandae ut architecto esse fuga, blanditiis nobis odit distinctio dignissimos voluptate, omnis animi, quis deleniti veniam! Eius, dignissimos.
+              Ullam quam voluptatum vel repellat, obcaecati maxime rem aut natus soluta velit unde et harum accusantium laboriosam nemo laudantium! Nihil dignissimos sint animi qui aut autem, asperiores deserunt beatae quo.
+              Labore dolorem doloribus mollitia officiis, sint dolorum ut dolore. Enim, quas! Cumque eaque reiciendis qui unde fuga repellendus molestiae earum necessitatibus, aut, suscipit sint dolorum vitae quas fugit, id ad!
+              Libero ad, a non doloremque minus commodi hic, error quae facere quod saepe vel veritatis qui iusto debitis! Sequi, quas nihil. Voluptatem excepturi suscipit quidem ullam quam totam molestiae veritatis?
+              Quas odit dolorem voluptatem pariatur quam quibusdam suscipit enim excepturi possimus facilis minima quia assumenda libero voluptate voluptatibus quae accusamus aspernatur reprehenderit, velit illo delectus dolorum ex fugiat repudiandae. Nisi.
+              Fugit inventore perferendis veniam voluptas saepe maxime aut assumenda eius illo. Animi maxime itaque sit minus impedit, fuga ullam quasi inventore ipsa sint optio voluptatum ea mollitia eos obcaecati labore.
+              Ad quasi soluta obcaecati, similique a facere laboriosam est eaque asperiores ex sit debitis laudantium eum saepe eligendi? Inventore culpa quasi commodi porro iure voluptate laboriosam cumque vel doloremque saepe.</p>
+              <p class="caja-animado" style="text-align: justify;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam delectus quo deleniti aliquam, error totam sed ab ullam repellendus numquam quas modi illo quis nihil aperiam maiores, laboriosam fugit dolor?
+              Beatae quibusdam sed ad rerum corporis impedit illo molestiae delectus pariatur, dolorum quidem in quas officia. Obcaecati, odio, inventore sequi sint eaque corporis asperiores non, quod vel deserunt incidunt eum!
+              Qui sunt voluptatibus, amet harum eligendi tenetur aperiam, quidem corrupti soluta fuga optio! Alias fugit hic suscipit vel iste est sed eveniet, animi sequi velit, quidem similique! Fugit, adipisci nemo.
+              Quo, nesciunt voluptas officiis cupiditate rem ab id repellendus distinctio consequuntur expedita tenetur reprehenderit harum tempore pariatur minus asperiores illo ipsum dolorum obcaecati nisi ex iure veniam cumque! Odit, distinctio.
+              Hic cumque neque delectus reprehenderit, et amet dignissimos earum laudantium? Doloribus, ipsum fugit molestiae a magni dolores temporibus quasi debitis dolor unde, minus odio cumque accusamus repellat sequi adipisci. Dolor.</p>
+              <p class="caja-animado" style="text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam inventore laudantium aliquam eius? Quaerat amet aspernatur distinctio saepe, voluptatum facere velit totam, molestiae consequatur ex veniam deleniti dolorum, aut obcaecati?
+              Quos eos autem at eligendi! Adipisci non ratione soluta vitae. Iusto quos veniam dolores molestias animi tenetur. Deserunt quidem cum voluptatibus totam maiores illo architecto dicta, provident minima necessitatibus. Dolores.
+              Dolores provident voluptate sapiente in quo incidunt ullam optio ducimus expedita, vero libero hic. Ad maiores unde, quidem incidunt ducimus eos accusantium inventore dolore iure rerum deleniti ab est consequatur!</p>
             </div>
           </div>
         </div>
@@ -51,10 +71,10 @@
                     <div class="input-group">
                       <form id="addComentario" class="w-100 d-flex">
                         <input id="texto" name="texto" type="text" class="form-control me-3" placeholder="Escriba un comentario">
-                        <input value="{{$datosPost[0]->id_user}}" name="id_user" style="display: none;" id="id_user" type="number" class="form-control">
+                        <input value="{{$userAuth}}" name="id_user" style="display: none;" id="id_user" type="number" class="form-control">
                         <input value="{{$datosPost[0]->id}}" name="id_post" style="display: none;" id="id_post" type="number" class="form-control">
                         <div class="input-group-append">
-                          <button type="submit" class="btn btn-info">
+                          <button id="btnAddComentario" type="submit" class="btn btn-info">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message-circle" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                               <path d="M3 20l1.3 -3.9a9 8 0 1 1 3.4 2.9l-4.7 1"></path>
@@ -154,76 +174,85 @@
           url  : "{{route('comentari.post')}}",
           data:  {'id': {{$datosPost[0]->id}}},
           success: function(response){
-            response.forEach(element => {
-              getRespForComment(element.id, function(respuestas){
-                $('#cajaComentarios').append(`
-                    <li class="list-group-item py-5">
-                      <div class="media d-flex">
-                        <div class="media-object avatar avatar-md mr-4 me-3" style="background-image: url('https://i.blogs.es/66b2a4/photo-1511367461989-f85a21fda167/1366_2000.jpeg');min-width: 60px;"></div>
-                        <div class="media-body w-100">
-                          <div class="media-heading d-flex justify-content-between align-items-ends">
-                            <div class="">
-                              <small class="float-right text-muted">${element.created_at.split('T')[0]}</small>
-
-                              <h5>${element.name}</h5>
-                            </div>
-                          </div>
-                          <div>
-                            ${element.texto}
-                          </div>
-                          <ul id="cajaRespuestas-com-${element.id}" class="media-list">
-                            <form id="addRespuesta-${element.id}" class="w-100 d-flex mt-4">
-                              <input name="texto" type="text" class="form-control me-3" placeholder="Escriba un comentario">
-                              <input value="2" name="id_user" style="display: none;" id="id_post" type="number" class="form-control">
-                              <input value="${element.id}" name="id_comentario" style="display: none;" id="id_post" type="number" class="form-control">
-                              <div class="input-group-append">
-                                <button type="submit" class="btn">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-upload" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
-                                    <polyline points="7 9 12 4 17 9"></polyline>
-                                    <line x1="12" y1="4" x2="12" y2="16"></line>
-                                  </svg>
-                                  Responder
-                                </button>
+            if(response == 'error'){
+              $('#texto').attr('placeholder', 'Solo usuarios logeados pueden comentar');
+              $( "#btnAddComentario" ).prop( "disabled", true );
+              $('#texto').attr('readonly', true);
+            }else{
+              $('#texto').attr('placeholder', 'Escriba un comentario');
+              $( "#btnAddComentario" ).prop( "disabled", false );
+              $('#texto').attr('readonly', false);
+              response.forEach(element => {
+                getRespForComment(element.id, function(respuestas){
+                  $('#cajaComentarios').append(`
+                      <li class="list-group-item py-5">
+                        <div class="media d-flex">
+                          <div class="media-object avatar avatar-md mr-4 me-3" style="background-image: url('https://i.blogs.es/66b2a4/photo-1511367461989-f85a21fda167/1366_2000.jpeg');min-width: 60px;"></div>
+                          <div class="media-body w-100">
+                            <div class="media-heading d-flex justify-content-between align-items-ends">
+                              <div class="">
+                                <small class="float-right text-muted">${element.created_at.split('T')[0]}</small>
+  
+                                <h5>${element.name}</h5>
                               </div>
-                            </form>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-                `);
-                $(`#addRespuesta-${element.id}`).submit(function(e){
-                  e.preventDefault();
-                  let currentDate = new Date();
-                  let dataRespuesta = $(this).serialize() + '&created_at=' + currentDate + '&updated_at=' + currentDate;
-                  $.ajax({
-                    type : 'POST',
-                    url  : "{{route('addRespuesta')}}",
-                    data:  dataRespuesta,
-                    success: function(response){
-                      console.log(response);
-                    }
-                  });
-                });
-                if(respuestas.length > 0){
-                  respuestas.forEach(item => {
-                    $(`#cajaRespuestas-com-${element.id}`).append(`
-                      <li class="media mt-4 d-flex">
-                        <div class="media-object avatar mr-4 me-3" style="background-image: url('https://www.trecebits.com/wp-content/uploads/2020/06/Foto-perfil-gay-800x445.jpg'); min-width: 40px;"></div>
-                        <div class="media-body">
-                          <strong>${item.name}: </strong>
-                          ${item.texto}
+                            </div>
+                            <div>
+                              ${element.texto}
+                            </div>
+                            <ul id="cajaRespuestas-com-${element.id}" class="media-list">
+                              <form id="addRespuesta-${element.id}" class="w-100 d-flex mt-4">
+                                <input name="texto" type="text" class="form-control me-3" placeholder="Escriba un comentario">
+                                <input value="{{$userAuth}}" name="id_user" style="display: none;" id="id_post" type="number" class="form-control">
+                                <input value="${element.id}" name="id_comentario" style="display: none;" id="id_post" type="number" class="form-control">
+                                <div class="input-group-append">
+                                  <button type="submit" class="btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-upload" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                      <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                                      <polyline points="7 9 12 4 17 9"></polyline>
+                                      <line x1="12" y1="4" x2="12" y2="16"></line>
+                                    </svg>
+                                    Responder
+                                  </button>
+                                </div>
+                              </form>
+                            </ul>
+                          </div>
                         </div>
                       </li>
-                    `);
+                  `);
+                  $(`#addRespuesta-${element.id}`).submit(function(e){
+                    e.preventDefault();
+                    let currentDate = new Date();
+                    let dataRespuesta = $(this).serialize() + '&created_at=' + currentDate + '&updated_at=' + currentDate;
+                    $.ajax({
+                      type : 'POST',
+                      url  : "{{route('addRespuesta')}}",
+                      data:  dataRespuesta,
+                      success: function(response){
+                        $(`#addRespuesta-${element.id}`).trigger('reset');
+                      }
+                    });
                   });
-                  
-                }
-                console.log(element);
-                console.log(respuestas);
+                  if(respuestas.length > 0){
+                    respuestas.forEach(item => {
+                      $(`#cajaRespuestas-com-${element.id}`).append(`
+                        <li class="media mt-4 d-flex">
+                          <div class="media-object avatar mr-4 me-3" style="background-image: url('https://www.trecebits.com/wp-content/uploads/2020/06/Foto-perfil-gay-800x445.jpg'); min-width: 40px;"></div>
+                          <div class="media-body">
+                            <strong>${item.name}: </strong>
+                            ${item.texto}
+                          </div>
+                        </li>
+                      `);
+                    });
+                    
+                  }
+                  console.log(element);
+                  console.log(respuestas);
+                });
               });
-            });
+            }
           }  
       });
       function getRespForComment(idComentario, callback){
@@ -246,7 +275,7 @@
           url  : "{{route('addComentario')}}",
           data:  dataComent,
           success: function(response){
-            console.log(response);
+            $("#addComentario").trigger('reset');
           }
         });
       });

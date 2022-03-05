@@ -25,27 +25,7 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {
-        // $validate = $request->validate([
-        //     'id_user' => 'required',
-        //     'categoria' => 'required',
-        //     'contenido' => 'required',
-        //     'tags' => 'required',
-        //     'created_at' => 'required',
-        //     'updated_at' => 'required',
-        // ]);
         $post = Post::create($request->all());
-
-        //
-        // $post = Post::create([
-        //     'id_user' => 1,
-        //     'categoria' => 'Layouts',
-        //     'contenido' => 'NOMBRE SLFKJ',
-        //     'imagen' => 'sdjfhsjd',
-        //     'tags' => 'ayuda,bootstrap,layouts',
-        //     'created_at' => '14-02-2022',
-        //     'updated_at' => '14-02-2022'
-        // ]);
-        // $data = \DB::table('posts')->get();
         return 'exito';
     }
 
@@ -55,9 +35,11 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
+        $userId = auth()->user();
+        return $userId;
     }
 
     /**
@@ -70,7 +52,8 @@ class PostController extends Controller
     {
         //
         $datos = Post::where('id', $id)->get();
-        return view('view-post', ['datosPost' => $datos]);
+        $userId = auth()->user();
+        return view('view-post', ['datosPost' => $datos, 'auth'=> $userId]);
         // return $datos;
     }
 
