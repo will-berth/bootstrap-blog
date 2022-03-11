@@ -27,6 +27,10 @@
   <script src="{{ asset('dist/js/jquery.min.js') }}"></script>
     <script src="{{ asset('dist/js/tabler.min.js') }}"></script>
 
+    <link rel="stylesheet" href="{{ asset('dist/dataTables/dataTables.bootstrap4.min.css')}}">
+    <script src="{{ asset('dist/dataTables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('dist/dataTables/dataTables.bootstrap4.min.js') }}"></script>
+
     <style>
       .darkModeSwitch{
           background: #3494b1;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -25,7 +26,28 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {
-        $post = Post::create($request->all());
+        $post = new Post();
+        $post = $request;
+        if($request->hasFile("imagen")){
+            $imagen = $request->file("imagen");
+            $nombreimagen = Str::slug($request->id_user."-".$request->contenido).".".$imagen->guessExtension();
+            $ruta = public_path("img/posts/");
+
+            //$imagen->move($ruta,$nombreimagen);
+            copy($imagen->getRealPath(),$ruta.$nombreimagen);
+
+            $postQuery = Post::create([
+                'id_user' => $request->id_user,
+                'categoria' => $request->categoria,
+                'contenido' => $request->contenido,
+                'imagen' => $nombreimagen,
+                'tags' => $request->tags,
+                'created_at' => $request->created_at,
+                'updated_at' => $request->updated_at,
+                'comentarios_cant' => 0,
+            ]);
+        }
+        // return $request->imagen;
         return 'exito';
     }
 
@@ -55,6 +77,24 @@ class PostController extends Controller
         $userId = auth()->user();
         return view('view-post', ['datosPost' => $datos, 'auth'=> $userId]);
         // return $datos;
+    }
+
+    public function adminposts(Request $request ){
+        $userId = auth()->user();
+        $datos = Post::select('contenido', 'categoria', 'tags', 'created_at')->where('id_user', $userId->id)->get();
+        $json['data'] = [];
+        if($datos) {
+            $json['data'] = $datos;
+        }
+        
+        $i = 0;
+        while ($i < count($json['data'])) {
+            $newDate = date('Y-m-d', strtotime($json['data'][$i]->created_at));
+            $json['data'][$i]->newdate = $newDate;
+            $i++;
+        }
+        return $json;
+
     }
 
     /**

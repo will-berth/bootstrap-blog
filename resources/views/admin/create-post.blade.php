@@ -24,7 +24,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-    <form id="createPost" action="" class="shadow-sm rounded p-4 blackSecondActive">
+    <form id="createPost" action="" class="shadow-sm rounded p-4 blackSecondActive" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label class="form-label required">Contenido</label>
@@ -54,15 +54,15 @@
                         <input name="tags" type="text" value="" class="form-control" required pattern="[a-zA-Z0-9áéóíú,,,,,,,  ]{2,200}" placeholder="Agregue sus tags. ej: Flexbox,Layouts,Formularios">
                     </div>
                 </div>
-                <!-- <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-3">
                     <label class="form-label required">Imagen</label>
                     <div class="input-icon mb-3">
                         <span class="input-icon-addon">
                           <i class="ti ti-photo"></i>
                         </span>
-                        <input type="file" value="" class="form-control">
+                        <input id="imagen" type="file" name="imagen" value="" class="form-control">
                     </div>
-                </div> -->
+                </div>
                 <!-- <div class="col-md-4 mb-3">
                     <label class="form-label required">Código</label>
                     <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Código"></textarea>
@@ -89,11 +89,16 @@
       });
       $('#createPost').submit(function(e){
         e.preventDefault();
-        let dataPost = $(this).serialize();
+        // let dataPost = $(this).serialize();
+        let dataPost = new FormData(this);
+        dataPost.append('_token', $('input[name=_token]').val());
         $.ajax({
-          type : 'POST',
           url  : "{{route('post.create')}}",
-          data:  dataPost,
+          type : 'POST',
+          data: dataPost,
+          cache: false,
+          contentType : false,
+          processData: false,
           success: function(response){
             $('#createPost').trigger('reset');
           }

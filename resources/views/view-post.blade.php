@@ -35,7 +35,8 @@
                   <span class="badge bg-info">{{$itemTag}}</span>
                 @endforeach
               </div>
-              <img src="https://www.nicesnippets.com/upload/how-to-set-vertical-align-in-bootstrap-code.png" alt="">
+              <!-- <img src="https://www.nicesnippets.com/upload/how-to-set-vertical-align-in-bootstrap-code.png" alt=""> -->
+              <img src="{{ asset('img/posts/'.$datosPost[0]->imagen) }}" alt="">
             </div>
           </div>
           

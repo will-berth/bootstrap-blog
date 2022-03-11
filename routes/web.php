@@ -74,3 +74,6 @@ Route::get('/categoria/{nombre}', [CategoriaController::class, 'show']);
 Route::get('/categoria', [CategoriaController::class, 'index']);
 Route::get('/check-user', [PostController::class, 'store']);
 Route::get('/dashboard', [CategoriaController::class, 'showadmin'])->name('publicaciones');
+
+
+Route::post('/post-admin', [PostController::class, 'adminposts'])->name('post.admin');

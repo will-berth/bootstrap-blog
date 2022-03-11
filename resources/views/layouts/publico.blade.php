@@ -14,6 +14,7 @@
     <title>BootstrapBlog</title>
     <script src="{{ asset('dist/js/jquery.min.js') }}"></script>
     <script src="{{ asset('dist/js/tabler.min.css') }}"></script>
+    <link rel="stylesheet" href="{{ asset('iconfont/tabler-icons.min.css')}}">
     <style>
       body{
         overflow-x: hidden;
@@ -34,9 +35,68 @@
         opacity: 0;
         transition: all 0.5s;
       }
+      .content-loader{
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background-color: white;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #preloader_1{
+          position:relative;
+      }
+      #preloader_1 span{
+          display:block;
+          bottom:0px;
+          width: 9px;
+          height: 5px;
+          background:#9b59b6;
+          position:absolute;
+          animation: preloader_1 1.5s  infinite ease-in-out;
+      }
+      
+      #preloader_1 span:nth-child(2){
+      left:11px;
+      animation-delay: .2s;
+      
+      }
+      #preloader_1 span:nth-child(3){
+      left:22px;
+      animation-delay: .4s;
+      }
+      #preloader_1 span:nth-child(4){
+      left:33px;
+      animation-delay: .6s;
+      }
+      #preloader_1 span:nth-child(5){
+      left:44px;
+      animation-delay: .8s;
+      }
+      @keyframes preloader_1 {
+          0% {height:5px;transform:translateY(0px);background:#9b59b6;}
+          25% {height:30px;transform:translateY(15px);background:#3498db;}
+          50% {height:5px;transform:translateY(0px);background:#9b59b6;}
+          100% {height:5px;transform:translateY(0px);background:#9b59b6;}
+      }
     </style>
+    
 </head>
 <body id="#body">
+  <div class="content-loader">
+
+    <div id="preloader_1">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
+  </div>
+
+
   <button id="btnTopScroll" class="btnTop d-flex justify-content-center align-items-center text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
 </svg></button>
@@ -117,6 +177,9 @@
 </div>
       @yield('contenido')
       <script>
+        $(window).on('load', function () {
+            $('.content-loader').delay(1500).fadeOut('slow');
+        });
         $(document).ready(function(){
           $('#btnTopScroll').click(function(){
             console.log('hhola')

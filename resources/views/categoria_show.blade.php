@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-                    <li class="breadcrumb-item"><a class="text-primary" href="/categorias">Categorias</a></li>
+                    <li class="breadcrumb-item"><a class="text-primary" href="/categoria">Categorias</a></li>
                     <li class="breadcrumb-item active" aria-current="page"><a href="#">Layouts</a></li>
                 </ol>
             </div>
@@ -14,7 +14,8 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="post-item d-flex flex-column">
                         <div class="img-post">
-                            <img src="https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post.jpeg" alt="">
+                            <!-- <img src="https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post.jpeg" alt=""> -->
+                            <img src="{{ asset('img/posts/'.$item->imagen) }}" alt="">
                             <div class="post-hover d-flex justify-content-center align-items-center">
                                 <a href="/post/{{ $item->id }}">Leer</a>
                             </div>
@@ -27,14 +28,14 @@
                                 <div class="text-muted">{{ $item->created_at }}</div>
                             </div>
                             <div class="ms-3">
-                                <a href="#" class="text-body"><i class="ti ti-message-circle"></i> 230</a>
+                                <a href="#" class="text-body"><i class="ti ti-message-circle"></i> {{$item->comentarios_cant}}</a>
                             </div>
                             
                         </div>
                     </div>
                 </div>
             @endforeach
-            <div class="col-lg-4 col-md-6 col-sm-12">
+            <!-- <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="post-item d-flex flex-column">
                     <div class="img-post">
                         <img src="https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post.jpeg" alt="">
@@ -120,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 @endsection

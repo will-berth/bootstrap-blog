@@ -16,7 +16,8 @@
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="post-item d-flex flex-column caja-animado">
                                 <div class="img-post">
-                                    <img src="https://mdbcdn.b-cdn.net/wp-content/uploads/2017/12/carousel.jpg" alt="">
+                                    <!-- <img src="https://mdbcdn.b-cdn.net/wp-content/uploads/2017/12/carousel.jpg" alt=""> -->
+                                    <img src="{{ asset('img/posts/'.$item->imagen) }}" alt="">
                                     <div class="post-hover d-flex justify-content-center align-items-center">
                                         <a href="/post/{{ $item->id }}">Leer</a>
                                     </div>
@@ -29,7 +30,7 @@
                                         <div class="text-muted">{{$item->created_at}}</div>
                                     </div>
                                     <div class="ms-3">
-                                        <a href="#" class="text-body"><i class="ti ti-message-circle"></i> 230</a>
+                                        <a href="#" class="text-body"><i class="ti ti-message-circle"></i> {{$item->comentarios_cant}}</a>
                                     </div>
                                     
                                 </div>

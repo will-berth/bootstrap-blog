@@ -17,8 +17,10 @@ class CategoriaController extends Controller
             'posts.categoria', 
             'posts.contenido', 
             'posts.tags', 
+            'posts.imagen', 
             'posts.created_at', 
             'posts.updated_at', 
+            'posts.comentarios_cant',
             'users.name'
         )->join('users', 'users.id', '=', 'posts.id_user')
         ->orderBy('categoria', 'ASC')->get();
@@ -34,8 +36,10 @@ class CategoriaController extends Controller
             'posts.categoria', 
             'posts.contenido', 
             'posts.tags', 
+            'posts.imagen',
             'posts.created_at', 
             'posts.updated_at', 
+            'posts.comentarios_cant',
             'users.name'
         )->join('users', 'users.id', '=', 'posts.id_user')
         ->orderBy('categoria', 'ASC')->get();
@@ -50,9 +54,11 @@ class CategoriaController extends Controller
             'posts.id_user', 
             'posts.categoria', 
             'posts.contenido', 
-            'posts.tags', 
+            'posts.tags',
+            'posts.imagen', 
             'posts.created_at', 
             'posts.updated_at', 
+            'posts.comentarios_cant',
             'users.name'
         )->join('users', 'users.id', '=', 'posts.id_user' )
         ->where('categoria', $nombre)->get();

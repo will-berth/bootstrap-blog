@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comentario;
+use App\Models\Post;
 
 class ComentarioController extends Controller
 {
@@ -30,7 +31,8 @@ class ComentarioController extends Controller
 
     public function create(Request $request){
         $coment = Comentario::create($request->all());
+        $post = Post::where('id', $request->id_post)->increment('comentarios_cant', 1);
 
-        return 'success';
+        return $request->id_post;
     }
 }
