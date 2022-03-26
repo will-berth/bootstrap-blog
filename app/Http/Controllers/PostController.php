@@ -20,6 +20,16 @@ class PostController extends Controller
         return $datos;
     }
 
+    public function indexComent(){
+        $datos = Post::orderBy('comentarios_cant', 'desc')->take(3)->get();
+        return $datos;
+    }
+
+    public function latestPosts(){
+        $datos = Post::latest()->take(3)->get();
+        return $datos;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

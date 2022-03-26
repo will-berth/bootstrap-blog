@@ -3,11 +3,26 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{{ asset('dist/css/estiloGeneral.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>BoostrapBlog</title>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
 
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script src="{{ asset('dist/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('dist/js/tabler.min.css') }}"></script>
+    <link rel="stylesheet" href="{{ asset('iconfont/tabler-icons.min.css')}}">
+
+    <!-- <link href="{{ asset('dist/css/estiloGeneral.css') }}" rel="stylesheet">
+
+    <script src="{{ asset('js/app.js') }}"></script>
+    <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet">
+    <title>BootstrapBlog</title>
+    <script src="{{ asset('dist/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('dist/js/tabler.min.css') }}"></script>
+    <link rel="stylesheet" href="{{ asset('iconfont/tabler-icons.min.css')}}"> -->
+
     <style>
       .content-loader{
         position: absolute;
@@ -157,11 +172,8 @@
                 sus conocimientos o dudas sobre temas de Bootstrap u otra tecnología que esté
                 relacionada al diseño web.</p>
               <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                <div class="rounded-md shadow">
-                  <a href="{{ route('login') }}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">Iniciar sesión</a>
-                </div>
                 <div class="mt-3 sm:mt-0 sm:ml-3">
-                  <a href="{{ route('register') }}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">Crear cuenta</a>
+                  <a href="{{ route('register') }}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">Crear cuenta</a>
                 </div>
               </div>
             </div>
@@ -169,9 +181,56 @@
         </div>
       </div>
       <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      <div class="mt-8 sm:mt-3 sm:flex sm:justify-center items-center lg:justify-end">
+                <div class="rounded-md shadow">
+                  <a href="{{ route('login') }}" class="w-full flex items-center justify-center px-4 py-1 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-2 md:text-sm md:px-5">Iniciar sesión</a>
+                </div>
+              </div>
         <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="{{ asset('img/fondo.png') }}" alt="">
       </div>
   </div>
+
+  <div class="container" style="padding: 2.5rem;">
+    <div class="flex">
+
+      <div class="w-full col-12 d-flex align-items-center justify-content-between blog-section">
+        <h2 style="font-size: 1.5rem;font-weight: bold;">Ultimos publicados</h2>
+      </div>
+    </div>
+    <div id="lastPosts" class="flex flex-wrap">
+                                                    
+    </div>
+  </div>
+
+  <div class="container" style="padding: 2.5rem;">
+    <div class="flex">
+
+      <div class="w-full col-12 d-flex align-items-center justify-content-between blog-section">
+        <h2 style="font-size: 1.5rem;font-weight: bold;">Mas comentados</h2>
+      </div>
+    </div>
+    <div id="masComentados" class="flex flex-wrap">
+                                                    
+    </div>
+  </div>
+
+  <footer class="w-full" style="padding: 3rem;background-color: #313131;">
+  <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
+                  <div class="flex items-center justify-between w-full md:w-auto">
+                    <a href="/">
+                      <span class="sr-only">Workflow</span>
+                      <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg">
+                    </a>
+                  </div>
+                  <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+                    <a href="/categoria" class="font-medium text-gray-500 hover:text-gray-900">Categorias</a>
+                    
+                    <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Preguntas</a>
+      
+                    <a href="/aboutus" class="font-medium text-gray-500 hover:text-gray-900">Quienes somos</a>
+                  </div>
+                </div>
+  </footer>
   <script>
     $(window).on('load', function () {
       $('.content-loader').delay(1500).fadeOut('slow');
@@ -184,6 +243,74 @@
 
       });
     })
+
+    $.ajax({
+          type : 'GET',
+          url  : "{{route('mas-comentados')}}",
+          success: function(response){
+            response.forEach(post => {
+              $('#masComentados').append(`
+              <div class="lg:w-1/3">
+        <div class="post-item d-flex flex-column">
+          <div class="img-post">
+              <!-- <img src="https://mdbcdn.b-cdn.net/wp-content/uploads/2017/12/carousel.jpg" alt=""> -->
+              <img src="{{ asset('img/posts/${post.imagen}') }}" alt="">
+              <div class="post-hover w-full flex items-center justify-center">
+                  <a href="/post/${post.id}">Leer</a>
+              </div>
+          </div>
+          <h3 class="mt-2">${post.contenido}</h3>
+          <div class="flex align-items-center pt-0 mt-2">
+            <span class="avatar" style="background-image: url('https://www.show.news/__export/1595109462886/sites/debate/img/2020/07/18/goku_x2x_crop1595109404079.jpg_423682103.jpg');width: 2.5rem;display: block;height: 2.5rem;background-size: cover;border-radius: .2rem;margin-right: 1rem;"></span>
+            <div class="ms-3 me-3" style="margin-right: 1rem;">
+              <a href="#" class="text-body">Jesus Lopez</a>
+              <div class="text-muted">${post.created_at.split('T')[0]}</div>
+            </div>
+            <div class="ms-3">
+              <a href="#" class="text-body"><i class="ti ti-message-circle"></i> ${post.comentarios_cant}</a>
+            </div>
+                                    
+          </div>
+        </div>                
+      </div>
+              `);
+            })
+          }
+        });
+
+        $.ajax({
+          type : 'GET',
+          url  : "{{route('ultimos-posts')}}",
+          success: function(response){
+            response.forEach(post => {
+              $('#lastPosts').append(`
+              <div class="lg:w-1/3">
+        <div class="post-item d-flex flex-column">
+          <div class="img-post">
+              <!-- <img src="https://mdbcdn.b-cdn.net/wp-content/uploads/2017/12/carousel.jpg" alt=""> -->
+              <img src="{{ asset('img/posts/${post.imagen}') }}" alt="">
+              <div class="post-hover w-full flex items-center justify-center">
+                  <a href="/post/${post.id}">Leer</a>
+              </div>
+          </div>
+          <h3 class="mt-2">${post.contenido}</h3>
+          <div class="flex align-items-center pt-0 mt-2">
+            <span class="avatar" style="background-image: url('https://www.show.news/__export/1595109462886/sites/debate/img/2020/07/18/goku_x2x_crop1595109404079.jpg_423682103.jpg');width: 2.5rem;display: block;height: 2.5rem;background-size: cover;border-radius: .2rem;margin-right: 1rem;"></span>
+            <div class="ms-3 me-3" style="margin-right: 1rem;">
+              <a href="#" class="text-body">Jesus Lopez</a>
+              <div class="text-muted">${post.created_at.split('T')[0]}</div>
+            </div>
+            <div class="ms-3">
+              <a href="#" class="text-body"><i class="ti ti-message-circle"></i> ${post.comentarios_cant}</a>
+            </div>
+                                    
+          </div>
+        </div>                
+      </div>
+              `);
+            })
+          }
+        });
   </script>
 </body>
 </html>

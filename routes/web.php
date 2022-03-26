@@ -77,3 +77,10 @@ Route::get('/dashboard', [CategoriaController::class, 'showadmin'])->name('publi
 
 
 Route::post('/post-admin', [PostController::class, 'adminposts'])->name('post.admin');
+
+
+// Post mas comentados
+Route::get('/comentados', [PostController::class, 'indexComent'])->name('mas-comentados');
+
+// Ultimos posts
+Route::get('/ultimos', [PostController::class, 'latestPosts'])->name('ultimos-posts');

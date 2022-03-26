@@ -81,6 +81,12 @@
           50% {height:5px;transform:translateY(0px);background:#9b59b6;}
           100% {height:5px;transform:translateY(0px);background:#9b59b6;}
       }
+
+      .post-preview{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     </style>
     
 </head>

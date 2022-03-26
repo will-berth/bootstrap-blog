@@ -3,6 +3,9 @@
 
     <div class="container mt-3">
         <div class="row">
+            @php
+                $contadorPosts = 1;
+            @endphp
             @foreach ($categorias as $categoria)
                 <div class="col-12 d-flex align-items-center justify-content-between blog-section">
                     <h2>{{$categoria->categoria}}</h2>
@@ -14,7 +17,11 @@
                 @foreach ($posts as $item)
                     @if ($categoria->categoria == $item->categoria && $contador <= 3)
                         <div class="col-lg-4 col-md-6 col-sm-12">
+                        @if ($contadorPosts < 2)
+                            <div class="post-item d-flex flex-column">
+                        @else
                             <div class="post-item d-flex flex-column caja-animado">
+                        @endif
                                 <div class="img-post">
                                     <!-- <img src="https://mdbcdn.b-cdn.net/wp-content/uploads/2017/12/carousel.jpg" alt=""> -->
                                     <img src="{{ asset('img/posts/'.$item->imagen) }}" alt="">
@@ -23,6 +30,7 @@
                                     </div>
                                 </div>
                                 <h3 class="mt-2">{{$item->contenido}}</h3>
+                                <p class="post-preview">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem blanditiis incidunt unde nihil! Amet ea, aliquam labore ut qui rerum eos reprehenderit eum dolorum earum libero aut. Quis, quaerat? Maiores.</p>
                                 <div class="d-flex align-items-center pt-0 mt-2">
                                     <span class="avatar" style="background-image: url(https://www.show.news/__export/1595109462886/sites/debate/img/2020/07/18/goku_x2x_crop1595109404079.jpg_423682103.jpg)"></span>
                                     <div class="ms-3 me-3">
@@ -42,6 +50,9 @@
                         @endphp
                     @endif
                 @endforeach
+                @php
+                    $contadorPosts++;
+                @endphp
             @endforeach
         </div>
     </div>
