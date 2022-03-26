@@ -21,7 +21,10 @@
         <div class="row">
           <div class="col-12">
             <div class="info-post" style="max-width: 70%;margin: 0 auto;">
-              <h2>{{$datosPost[0]->contenido}}</h2>
+              <h2 style="font-size: 2rem;">{{$datosPost[0]->contenido}}</h2>
+              <div class="">
+                <span class="p">Por: {{$autor[0]->name}}</span>
+              </div>
                 <span class="post-date"><time class="post-date">{{$datosPost[0]->created_at}}</time></span>
                 <!-- <span class="dot"></span>
                 <span class="readingtime">4 min read</span>
@@ -175,6 +178,7 @@
           url  : "{{route('comentari.post')}}",
           data:  {'id': {{$datosPost[0]->id}}},
           success: function(response){
+            console.log(response)
             if(response == 'error'){
               $('#texto').attr('placeholder', 'Solo usuarios logeados pueden comentar');
               $( "#btnAddComentario" ).prop( "disabled", true );

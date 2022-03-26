@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -74,8 +75,9 @@ class PostController extends Controller
     {
         //
         $datos = Post::where('id', $id)->get();
+        $name = User::where('id', $datos[0]->id_user)->get();
         $userId = auth()->user();
-        return view('view-post', ['datosPost' => $datos, 'auth'=> $userId]);
+        return view('view-post', ['datosPost' => $datos, 'auth'=> $userId, 'autor' => $name]);
         // return $datos;
     }
 
